@@ -6,7 +6,10 @@
 <section class="aurea-newsletter" style="
   background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
   color: #FFFFFF;
-  padding: 5rem 2rem;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 ">
   <div class="page-width" style="max-width: 700px; margin: 0 auto; text-align: center;">
     
@@ -165,6 +168,30 @@
       "id": "disclaimer",
       "label": "Disclaimer",
       "default": "No spam, ever. Unsubscribe anytime."
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
     }
   ],
   "presets": [

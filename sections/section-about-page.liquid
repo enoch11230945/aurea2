@@ -4,7 +4,7 @@
   Gold SVG icons - no emojis
 {%- endcomment -%}
 
-<div class="aurea-about">
+<div class="aurea-about" style="--about-mission-pt: {{ section.settings.mission_padding_top }}px; --about-mission-pb: {{ section.settings.mission_padding_bottom }}px; --about-values-pt: {{ section.settings.values_padding_top }}px; --about-values-pb: {{ section.settings.values_padding_bottom }}px; --about-quote-pt: {{ section.settings.quote_padding_top }}px; --about-quote-pb: {{ section.settings.quote_padding_bottom }}px;">
   
   {%- comment -%} Hero Banner {%- endcomment -%}
   <section class="aurea-about__hero">
@@ -167,7 +167,10 @@
   
   /* Mission */
   .aurea-about__mission {
-    padding: 5rem 2rem;
+    padding-top: var(--about-mission-pt, 80px);
+    padding-bottom: var(--about-mission-pb, 80px);
+    padding-left: 2rem;
+    padding-right: 2rem;
     text-align: center;
   }
   
@@ -211,7 +214,10 @@
   /* Values */
   .aurea-about__values {
     background: #F5F0E6;
-    padding: 5rem 2rem;
+    padding-top: var(--about-values-pt, 80px);
+    padding-bottom: var(--about-values-pb, 80px);
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   
   .aurea-about__values-heading {
@@ -262,7 +268,10 @@
   
   /* Quote */
   .aurea-about__quote {
-    padding: 5rem 2rem;
+    padding-top: var(--about-quote-pt, 80px);
+    padding-bottom: var(--about-quote-pb, 80px);
+    padding-left: 2rem;
+    padding-right: 2rem;
     text-align: center;
   }
   
@@ -388,6 +397,70 @@
       "id": "quote_author",
       "label": "Author",
       "default": "— The AUREA Team"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "mission_padding_top",
+      "label": "Mission: Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mission_padding_bottom",
+      "label": "Mission: Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "values_padding_top",
+      "label": "Values: Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "values_padding_bottom",
+      "label": "Values: Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "quote_padding_top",
+      "label": "Quote: Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "quote_padding_bottom",
+      "label": "Quote: Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
     }
   ],
   "blocks": [
