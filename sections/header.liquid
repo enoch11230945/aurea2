@@ -613,19 +613,30 @@
         grid-area: center;
       }
 
-      &:not(:has(header-actions)) .search-action {
-        grid-area: leftB;
+      /* Explicitly position hamburger/drawer trigger */
+      .header__drawer,
+      header-drawer {
+        grid-area: leftA;
       }
 
-      &:not(:has(.account-actions)) .search-action {
-        grid-area: rightA;
-      }
-
+      /* Stabilize search action - keep it on the left to prevent jumping */
       .search-action {
         grid-area: leftB;
       }
 
+      /* Allow header-actions children to participate in the grid */
       header-actions {
+        display: contents;
+      }
+
+      /* Explicitly position optional account button */
+      .account-button {
+        grid-area: rightA;
+      }
+
+      /* Cart icon is always on the far right */
+      .header-actions__cart-icon,
+      .action__cart {
         grid-area: rightB;
       }
     }

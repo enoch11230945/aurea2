@@ -79,9 +79,20 @@ button[type="submit"],
     font-size: 0.85rem;
     padding: 1.25rem 2.5rem;
     border-radius: 0 !important;
-    transition: all var(--aurea-transition-medium);
+    transition: background-color var(--aurea-transition-medium),
+        color var(--aurea-transition-medium),
+        border-color var(--aurea-transition-medium),
+        opacity var(--aurea-transition-medium),
+        transform var(--aurea-transition-medium),
+        box-shadow var(--aurea-transition-medium);
     position: relative;
     overflow: hidden;
+}
+
+/* Specifically disable 'all' transitions for header actions to prevent jitter */
+.header-actions__action,
+.header__icon--menu {
+    transition: opacity var(--aurea-transition-fast), color var(--aurea-transition-fast) !important;
 }
 
 /* Gold shimmer effect on hover */
