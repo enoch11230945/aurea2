@@ -4,7 +4,7 @@
   No emojis - professional SVG icons only
 {%- endcomment -%}
 
-<section class="aurea-trust-bar">
+<section class="aurea-trust-bar" style="--trust-bar-padding-top: {{ section.settings.padding_top }}px; --trust-bar-padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="page-width">
     <div class="aurea-trust-bar__items">
       
@@ -93,7 +93,10 @@
   .aurea-trust-bar {
     background: #0D0D0D;
     color: #FFFFFF;
-    padding: 1.75rem 1rem;
+    padding-top: var(--trust-bar-padding-top, 28px);
+    padding-bottom: var(--trust-bar-padding-bottom, 28px);
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   .aurea-trust-bar__items {
@@ -139,7 +142,32 @@
 {% schema %}
 {
   "name": "Trust Bar",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    }
+  ],
   "blocks": [
     {
       "type": "badge",

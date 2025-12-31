@@ -5,7 +5,7 @@
   Usage: Add to homepage or any page via Theme Editor
 {%- endcomment -%}
 
-<section class="aurea-testimonials" style="padding: 4rem 0; background: #FAFAFA;">
+<section class="aurea-testimonials" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background: #FAFAFA;">
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
     
     {%- comment -%} Header {%- endcomment -%}
@@ -176,6 +176,30 @@
       "id": "recommend_percent",
       "label": "Recommend Percentage",
       "default": "98%"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     }
   ],
   "blocks": [
