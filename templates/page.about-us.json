@@ -1,0 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * AUREA About Us Page - Optimized Layout
+ * Removed excessive top padding and duplicate sections
+ * ------------------------------------------------------------
+ */ {
+    "sections": {
+        "hero": {
+            "type": "section-about-page",
+            "blocks": {
+                "value_1": {
+                    "type": "value",
+                    "settings": {
+                        "icon_type": "diamond",
+                        "title": "Premium Quality",
+                        "description": "316L stainless steel with 18k gold PVD that never tarnishes."
+                    }
+                },
+                "value_2": {
+                    "type": "value",
+                    "settings": {
+                        "icon_type": "heart",
+                        "title": "Made with Love",
+                        "description": "Every piece is crafted to help you express your deepest emotions."
+                    }
+                },
+                "value_3": {
+                    "type": "value",
+                    "settings": {
+                        "icon_type": "truck",
+                        "title": "UK Based",
+                        "description": "Fast 2-3 day delivery. Hand-packed with care."
+                    }
+                }
+            },
+            "block_order": [
+                "value_1",
+                "value_2",
+                "value_3"
+            ],
+            "settings": {
+                "hero_preheading": "Our Story",
+                "hero_heading": "Crafted with Love, Worn with Meaning",
+                "hero_text": "Every piece tells a story. What will yours say?",
+                "mission_label": "Our Mission",
+                "mission_heading": "To Help You Express Love Through Timeless Jewelry",
+                "mission_text": "At AUREA, we believe that jewelry should be more than decoration. Each piece we create carries a story—a whisper of devotion, a symbol of connection, a reminder of the bonds that define us. Our journey began with a simple question: how can we help people express the feelings that words alone cannot capture?",
+                "values_heading": "What We Stand For",
+                "quote_text": "We don't just sell jewelry. We help create moments that last forever—the look in her eyes when she opens the box, the tears of joy, the embrace that follows.",
+                "quote_author": "— The AUREA Team"
+            }
+        }
+    },
+    "order": [
+        "hero"
+    ]
+}

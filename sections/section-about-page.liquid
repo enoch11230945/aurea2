@@ -1,121 +1,90 @@
 {%- comment -%}
   AUREA About Page Section
-  Elegant brand story page with founder story, values, and mission
+  Elegant brand story page with hero, mission, values, and quote
+  Gold SVG icons - no emojis
 {%- endcomment -%}
 
-<div class="aurea-about" style="padding: 0;">
+<div class="aurea-about">
   
   {%- comment -%} Hero Banner {%- endcomment -%}
-  <section class="aurea-about__hero" style="
-    position: relative;
-    height: 60vh;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
-    overflow: hidden;
-  ">
+  <section class="aurea-about__hero">
     {% if section.settings.hero_image %}
       <img 
         src="{{ section.settings.hero_image | image_url: width: 1920 }}"
         alt="{{ section.settings.hero_heading }}"
-        style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4;"
-        loading="lazy"
+        class="aurea-about__hero-bg"
+        loading="eager"
       >
     {% endif %}
-    <div style="position: relative; text-align: center; padding: 2rem; max-width: 800px;">
-      <p style="
-        font-family: 'Cormorant', Georgia, serif;
-        font-size: 0.9rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: #D4AF37;
-        margin-bottom: 1rem;
-      ">{{ section.settings.hero_preheading }}</p>
-      <h1 style="
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: clamp(2.5rem, 6vw, 4rem);
-        font-weight: 400;
-        color: #FFFFFF;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-      ">{{ section.settings.hero_heading }}</h1>
-      <p style="
-        font-family: 'Cormorant', Georgia, serif;
-        font-size: 1.25rem;
-        color: rgba(255,255,255,0.8);
-        line-height: 1.8;
-      ">{{ section.settings.hero_text }}</p>
+    <div class="aurea-about__hero-content">
+      <p class="aurea-about__hero-preheading">{{ section.settings.hero_preheading }}</p>
+      <h1 class="aurea-about__hero-heading">{{ section.settings.hero_heading }}</h1>
+      <p class="aurea-about__hero-text">{{ section.settings.hero_text }}</p>
     </div>
   </section>
   
   {%- comment -%} Mission Section {%- endcomment -%}
-  <section class="aurea-about__mission page-width" style="padding: 6rem 2rem; text-align: center;">
-    <div style="max-width: 700px; margin: 0 auto;">
-      <div style="width: 60px; height: 1px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); margin: 0 auto 2rem;"></div>
-      <p style="
-        font-family: 'Cormorant', Georgia, serif;
-        font-size: 0.85rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #B8860B;
-        margin-bottom: 1rem;
-      ">{{ section.settings.mission_label }}</p>
-      <h2 style="
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
-        font-weight: 400;
-        margin-bottom: 2rem;
-        line-height: 1.3;
-      ">{{ section.settings.mission_heading }}</h2>
-      <p style="
-        font-family: 'Cormorant', Georgia, serif;
-        font-size: 1.1rem;
-        line-height: 2;
-        color: rgba(26,26,26,0.8);
-      ">{{ section.settings.mission_text }}</p>
+  <section class="aurea-about__mission page-width">
+    <div class="aurea-about__mission-inner">
+      <div class="aurea-about__divider"></div>
+      <p class="aurea-about__mission-label">{{ section.settings.mission_label }}</p>
+      <h2 class="aurea-about__mission-heading">{{ section.settings.mission_heading }}</h2>
+      <p class="aurea-about__mission-text">{{ section.settings.mission_text }}</p>
     </div>
   </section>
   
   {%- comment -%} Values Grid {%- endcomment -%}
-  <section class="aurea-about__values" style="background: #F5F0E6; padding: 6rem 2rem;">
+  <section class="aurea-about__values">
     <div class="page-width">
-      <h2 style="
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: clamp(1.5rem, 3vw, 2rem);
-        font-weight: 400;
-        text-align: center;
-        margin-bottom: 4rem;
-      ">{{ section.settings.values_heading }}</h2>
+      <h2 class="aurea-about__values-heading">{{ section.settings.values_heading }}</h2>
       
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem;">
+      <div class="aurea-about__values-grid">
         {% for block in section.blocks %}
           {% if block.type == 'value' %}
-            <div style="text-align: center;">
-              <div style="
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 1.5rem;
-                border: 1px solid #D4AF37;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2rem;
-              ">{{ block.settings.icon }}</div>
-              <h3 style="
-                font-family: 'Playfair Display', Georgia, serif;
-                font-size: 1.25rem;
-                font-weight: 400;
-                margin-bottom: 1rem;
-              ">{{ block.settings.title }}</h3>
-              <p style="
-                font-family: 'Cormorant', Georgia, serif;
-                font-size: 1rem;
-                line-height: 1.8;
-                color: rgba(26,26,26,0.7);
-              ">{{ block.settings.description }}</p>
+            <div class="aurea-about__value" {{ block.shopify_attributes }}>
+              <div class="aurea-about__value-icon">
+                {%- case block.settings.icon_type -%}
+                  {%- when 'diamond' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/><path d="M12 22l4-13M12 22l-4-13"/>
+                    </svg>
+                  {%- when 'heart' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                  {%- when 'truck' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                  {%- when 'shield' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
+                    </svg>
+                  {%- when 'star' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                  {%- when 'droplet' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                  {%- when 'gift' -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8V21M3 12h18"/>
+                    </svg>
+                  {%- else -%}
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/>
+                    </svg>
+                {%- endcase -%}
+              </div>
+              <h3 class="aurea-about__value-title">{{ block.settings.title }}</h3>
+              <p class="aurea-about__value-desc">{{ block.settings.description }}</p>
             </div>
           {% endif %}
         {% endfor %}
@@ -124,36 +93,226 @@
   </section>
   
   {%- comment -%} Founder Quote {%- endcomment -%}
-  <section class="aurea-about__quote page-width" style="padding: 6rem 2rem; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="margin-bottom: 2rem; color: #D4AF37;">
-        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" fill="currentColor" opacity="0.2"/>
-        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v4z" fill="currentColor" opacity="0.2"/>
+  <section class="aurea-about__quote page-width">
+    <div class="aurea-about__quote-inner">
+      <svg class="aurea-about__quote-mark" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" opacity="0.3"/>
+        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v4z" opacity="0.3"/>
       </svg>
-      <blockquote style="
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: clamp(1.25rem, 3vw, 1.75rem);
-        font-style: italic;
-        font-weight: 400;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-      ">{{ section.settings.quote_text }}</blockquote>
-      <p style="
-        font-family: 'Cormorant', Georgia, serif;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #B8860B;
-      ">{{ section.settings.quote_author }}</p>
+      <blockquote class="aurea-about__quote-text">{{ section.settings.quote_text }}</blockquote>
+      <p class="aurea-about__quote-author">{{ section.settings.quote_author }}</p>
     </div>
   </section>
   
 </div>
 
+<style>
+  .aurea-about {
+    padding: 0;
+  }
+  
+  /* Hero */
+  .aurea-about__hero {
+    position: relative;
+    height: 50vh;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+    overflow: hidden;
+  }
+  
+  .aurea-about__hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+  
+  .aurea-about__hero-content {
+    position: relative;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+  }
+  
+  .aurea-about__hero-preheading {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin: 0 0 1rem;
+  }
+  
+  .aurea-about__hero-heading {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+  }
+  
+  .aurea-about__hero-text {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin: 0;
+  }
+  
+  /* Mission */
+  .aurea-about__mission {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  
+  .aurea-about__mission-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .aurea-about__divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    margin: 0 auto 2rem;
+  }
+  
+  .aurea-about__mission-label {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #B8860B;
+    margin: 0 0 1rem;
+  }
+  
+  .aurea-about__mission-heading {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0 0 1.75rem;
+  }
+  
+  .aurea-about__mission-text {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(26, 26, 26, 0.75);
+    margin: 0;
+  }
+  
+  /* Values */
+  .aurea-about__values {
+    background: #F5F0E6;
+    padding: 5rem 2rem;
+  }
+  
+  .aurea-about__values-heading {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 3.5rem;
+  }
+  
+  .aurea-about__values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+  }
+  
+  .aurea-about__value {
+    text-align: center;
+  }
+  
+  .aurea-about__value-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.25rem;
+    border: 1px solid #D4AF37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B8860B;
+    background: #FFFFFF;
+  }
+  
+  .aurea-about__value-title {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin: 0 0 0.75rem;
+  }
+  
+  .aurea-about__value-desc {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(26, 26, 26, 0.7);
+    margin: 0;
+  }
+  
+  /* Quote */
+  .aurea-about__quote {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  
+  .aurea-about__quote-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .aurea-about__quote-mark {
+    color: #D4AF37;
+    margin-bottom: 1.5rem;
+  }
+  
+  .aurea-about__quote-text {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+  
+  .aurea-about__quote-author {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B8860B;
+    margin: 0;
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .aurea-about__hero {
+      height: 40vh;
+      min-height: 300px;
+    }
+    
+    .aurea-about__mission,
+    .aurea-about__values,
+    .aurea-about__quote {
+      padding: 3.5rem 1.5rem;
+    }
+  }
+</style>
+
 {% schema %}
 {
-  "name": "About Page",
+  "name": "AUREA About Page",
   "settings": [
     {
       "type": "header",
@@ -202,7 +361,7 @@
       "type": "textarea",
       "id": "mission_text",
       "label": "Text",
-      "default": "At AUREA, we believe that jewelry should be more than decoration. Each piece we create carries a story—a whisper of devotion, a symbol of connection, a reminder of the bonds that define us. Our journey began with a simple question: how can we help people express the feelings that words alone cannot capture?"
+      "default": "At AUREA, we believe that jewelry should be more than decoration. Each piece we create carries a story—a whisper of devotion, a symbol of connection, a reminder of the bonds that define us."
     },
     {
       "type": "header",
@@ -216,7 +375,7 @@
     },
     {
       "type": "header",
-      "content": "Founder Quote"
+      "content": "Quote Section"
     },
     {
       "type": "textarea",
@@ -228,7 +387,7 @@
       "type": "text",
       "id": "quote_author",
       "label": "Author",
-      "default": "— The AUREA Atelier"
+      "default": "— The AUREA Team"
     }
   ],
   "blocks": [
@@ -237,10 +396,20 @@
       "name": "Value",
       "settings": [
         {
-          "type": "text",
-          "id": "icon",
-          "label": "Icon (Emoji)",
-          "default": "💎"
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon",
+          "options": [
+            { "value": "diamond", "label": "Diamond / Quality" },
+            { "value": "heart", "label": "Heart / Love" },
+            { "value": "truck", "label": "Truck / Delivery" },
+            { "value": "shield", "label": "Shield / Protection" },
+            { "value": "star", "label": "Star / Premium" },
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "droplet", "label": "Droplet / Waterproof" },
+            { "value": "gift", "label": "Gift / Gifting" }
+          ],
+          "default": "diamond"
         },
         {
           "type": "text",
@@ -259,12 +428,12 @@
   ],
   "presets": [
     {
-      "name": "About Page",
+      "name": "AUREA About Page",
       "blocks": [
         {
           "type": "value",
           "settings": {
-            "icon": "💎",
+            "icon_type": "diamond",
             "title": "Premium Quality",
             "description": "316L stainless steel with 18k gold PVD that never tarnishes."
           }
@@ -272,7 +441,7 @@
         {
           "type": "value",
           "settings": {
-            "icon": "❤️",
+            "icon_type": "heart",
             "title": "Made with Love",
             "description": "Every piece is crafted to help you express your deepest emotions."
           }
@@ -280,9 +449,9 @@
         {
           "type": "value",
           "settings": {
-            "icon": "🇬🇧",
+            "icon_type": "truck",
             "title": "UK Based",
-            "description": "Fast 2-3 day delivery from our London warehouse."
+            "description": "Fast 2-3 day delivery. Hand-packed with care."
           }
         }
       ]
