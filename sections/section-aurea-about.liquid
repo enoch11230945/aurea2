@@ -29,7 +29,7 @@
         {%- if block.type == 'value' -%}
         <div class="aurea-value" style="text-align: center; padding: 2rem; background: #FAFAFA; border-radius: 8px;" {{ block.shopify_attributes }}>
           <div class="aurea-value__icon" style="font-size: 2.5rem; margin-bottom: 1rem;">
-            {{ block.settings.icon | default: '✨' }}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <h3 class="aurea-value__title" style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-weight: 500; color: #1A1A1A; margin: 0 0 0.75rem 0;">
             {{ block.settings.title }}
@@ -58,7 +58,7 @@
     {%- comment -%} Signature {%- endcomment -%}
     <footer class="aurea-about__signature" style="text-align: center; margin-top: 3rem;">
       <p style="font-family: 'Cormorant', Georgia, serif; font-style: italic; font-size: 1.1rem; color: #666;">
-        {{ section.settings.signature | default: '— The AUREA London Team ✨' }}
+        {{ section.settings.signature | default: '— The AUREA London Team' }}
       </p>
     </footer>
     
@@ -105,7 +105,7 @@
       "type": "text",
       "id": "signature",
       "label": "Signature",
-      "default": "— The AUREA London Team ✨"
+      "default": "— The AUREA London Team"
     }
   ],
   "blocks": [
@@ -116,8 +116,8 @@
         {
           "type": "text",
           "id": "icon",
-          "label": "Icon (emoji)",
-          "default": "✨"
+          "label": "Icon Text",
+          "default": ""
         },
         {
           "type": "text",
@@ -141,7 +141,7 @@
         {
           "type": "value",
           "settings": {
-            "icon": "💎",
+            "icon": "",
             "title": "Curated Selection",
             "description": "We personally select each piece to ensure exceptional quality and timeless design."
           }
@@ -149,7 +149,7 @@
         {
           "type": "value",
           "settings": {
-            "icon": "🇬🇧",
+            "icon": "",
             "title": "UK-Based",
             "description": "Fast shipping from our London warehouse. Your order arrives in 2-3 days."
           }
@@ -157,7 +157,7 @@
         {
           "type": "value",
           "settings": {
-            "icon": "✨",
+            "icon": "",
             "title": "Quality First",
             "description": "18K Gold Vermeil & 925 Sterling Silver. Only the finest materials."
           }
@@ -165,7 +165,7 @@
         {
           "type": "value",
           "settings": {
-            "icon": "🌿",
+            "icon": "",
             "title": "Sustainable",
             "description": "Minimal packaging, maximum beauty. We care about our planet."
           }
