@@ -1,0 +1,151 @@
+{%- comment -%}
+  AUREA Sustainability Badge Block
+  
+  Shows eco-friendly and ethical commitments.
+  Can be added to footer, product page, or cart drawer.
+  
+  Configurable icon, title, and description.
+{%- endcomment -%}
+
+{%- liquid
+  assign block_settings = block.settings
+-%}
+
+<div 
+  class="aurea-sustainability-block spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="aurea-sustainability-block__inner">
+    <span class="aurea-sustainability-block__icon" aria-hidden="true">
+      {{ block_settings.icon | default: '🌿' }}
+    </span>
+    <div class="aurea-sustainability-block__content">
+      <span class="aurea-sustainability-block__title">
+        {{ block_settings.title | default: 'Committed to Sustainability' }}
+      </span>
+      <span class="aurea-sustainability-block__text">
+        {{ block_settings.description | default: '100% Recyclable Packaging • Ethically Sourced Materials' }}
+      </span>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .aurea-sustainability-block__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md, 12px);
+    padding: var(--padding-md, 16px) var(--padding-lg, 20px);
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.04) 0%, rgba(34, 139, 34, 0.02) 100%);
+    border: 1px solid rgba(34, 139, 34, 0.12);
+    border-radius: var(--style-border-radius-inputs, 12px);
+  }
+  
+  .aurea-sustainability-block__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  
+  .aurea-sustainability-block__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .aurea-sustainability-block__title {
+    font-weight: 600;
+    font-size: var(--font-paragraph--size, 0.9rem);
+    color: #228B22;
+  }
+  
+  .aurea-sustainability-block__text {
+    font-size: var(--font-paragraph-small--size, 0.8rem);
+    color: rgba(var(--color-foreground-rgb), 0.7);
+  }
+  
+  @media (max-width: 480px) {
+    .aurea-sustainability-block__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sustainability Badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Icon (Emoji)",
+      "default": "🌿"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Committed to Sustainability"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "100% Recyclable Packaging • Ethically Sourced Materials"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sustainability Badge",
+      "category": "t:categories.about"
+    }
+  ]
+}
+{% endschema %}

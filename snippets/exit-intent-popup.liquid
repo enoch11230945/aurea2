@@ -1,0 +1,396 @@
+{%- comment -%}
+  AUREA Exit Intent Popup
+  
+  Captures users who are about to leave with a discount offer.
+  Minimal, luxury design - no emojis.
+  
+  Usage: Place in theme.liquid before </body>
+  {% render 'exit-intent-popup' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign popup_enabled = true
+  assign discount_code = 'COMEBACK10'
+  assign discount_percent = 10
+  assign headline = "Before you go..."
+  assign subheadline = "Here's a little something to help you decide"
+  assign button_text = "CLAIM MY DISCOUNT"
+  assign email_placeholder = "Enter your email"
+  assign cookie_days = 1
+-%}
+
+{%- if popup_enabled -%}
+<div 
+  class="aurea-exit-popup" 
+  id="aurea-exit-popup"
+  data-exit-popup
+  data-cookie-days="{{ cookie_days }}"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-popup-headline"
+  hidden
+>
+  <div class="aurea-exit-popup__backdrop" data-popup-close></div>
+  
+  <div class="aurea-exit-popup__content">
+    <button 
+      class="aurea-exit-popup__close" 
+      data-popup-close
+      aria-label="Close popup"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    
+    <div class="aurea-exit-popup__header">
+      <h2 class="aurea-exit-popup__headline" id="exit-popup-headline">
+        {{ headline }}
+      </h2>
+      <p class="aurea-exit-popup__subheadline">
+        {{ subheadline }}
+      </p>
+    </div>
+    
+    <div class="aurea-exit-popup__offer">
+      <span class="aurea-exit-popup__discount-value">{{ discount_percent }}% OFF</span>
+      <span class="aurea-exit-popup__discount-label">your first order</span>
+    </div>
+    
+    <form class="aurea-exit-popup__form" data-popup-form>
+      <input 
+        type="email" 
+        name="email"
+        placeholder="{{ email_placeholder }}"
+        required
+        class="aurea-exit-popup__input"
+        autocomplete="email"
+      >
+      <button type="submit" class="aurea-exit-popup__button">
+        {{ button_text }}
+      </button>
+    </form>
+    
+    <p class="aurea-exit-popup__privacy">
+      By subscribing, you agree to receive marketing emails. Unsubscribe anytime.
+    </p>
+    
+    <button class="aurea-exit-popup__no-thanks" data-popup-close>
+      No thanks, I'll pay full price
+    </button>
+  </div>
+</div>
+
+<style>
+  .aurea-exit-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .aurea-exit-popup[data-visible="true"] {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .aurea-exit-popup__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .aurea-exit-popup__content {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    padding: 48px 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  
+  .aurea-exit-popup[data-visible="true"] .aurea-exit-popup__content {
+    transform: scale(1) translateY(0);
+  }
+  
+  .aurea-exit-popup__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #999;
+    transition: color 0.2s;
+  }
+  
+  .aurea-exit-popup__close:hover {
+    color: #1A1A1A;
+  }
+  
+  .aurea-exit-popup__header {
+    margin-bottom: 32px;
+  }
+  
+  .aurea-exit-popup__headline {
+    font-family: var(--font-heading--family, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #1A1A1A;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  .aurea-exit-popup__subheadline {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+    font-weight: 400;
+  }
+  
+  .aurea-exit-popup__offer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 32px;
+  }
+  
+  .aurea-exit-popup__discount-value {
+    font-family: var(--font-heading--family, 'Playfair Display', serif);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #B8860B;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  
+  .aurea-exit-popup__discount-label {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .aurea-exit-popup__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .aurea-exit-popup__input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    text-align: center;
+  }
+  
+  .aurea-exit-popup__input::placeholder {
+    color: #999;
+  }
+  
+  .aurea-exit-popup__input:focus {
+    outline: none;
+    border-color: #B8860B;
+  }
+  
+  .aurea-exit-popup__button {
+    width: 100%;
+    padding: 14px 24px;
+    background: #1A1A1A;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+  }
+  
+  .aurea-exit-popup__button:hover {
+    background: #333;
+  }
+  
+  .aurea-exit-popup__privacy {
+    font-size: 0.7rem;
+    color: #999;
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+  
+  .aurea-exit-popup__no-thanks {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+    font-family: inherit;
+  }
+  
+  .aurea-exit-popup__no-thanks:hover {
+    color: #1A1A1A;
+  }
+  
+  @media (max-width: 480px) {
+    .aurea-exit-popup__content {
+      padding: 40px 28px;
+    }
+    
+    .aurea-exit-popup__headline {
+      font-size: 1.5rem;
+    }
+    
+    .aurea-exit-popup__discount-value {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const popup = document.querySelector('[data-exit-popup]');
+  if (!popup) return;
+  
+  const cookieDays = parseInt(popup.dataset.cookieDays, 10) || 1;
+  const storageKey = 'aurea_exit_popup_shown';
+  
+  function hasBeenShown() {
+    try {
+      const shown = localStorage.getItem(storageKey);
+      if (!shown) return false;
+      
+      const shownDate = new Date(parseInt(shown, 10));
+      const now = new Date();
+      const diffDays = (now - shownDate) / (1000 * 60 * 60 * 24);
+      
+      return diffDays < cookieDays;
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  function markAsShown() {
+    try {
+      localStorage.setItem(storageKey, Date.now().toString());
+    } catch (e) {}
+  }
+  
+  function showPopup() {
+    if (hasBeenShown()) return;
+    
+    popup.hidden = false;
+    popup.removeAttribute('hidden');
+    
+    requestAnimationFrame(() => {
+      popup.dataset.visible = 'true';
+    });
+    
+    markAsShown();
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function hidePopup() {
+    popup.dataset.visible = 'false';
+    document.body.style.overflow = '';
+    
+    setTimeout(() => {
+      popup.hidden = true;
+    }, 300);
+  }
+  
+  popup.querySelectorAll('[data-popup-close]').forEach(el => {
+    el.addEventListener('click', hidePopup);
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup.dataset.visible === 'true') {
+      hidePopup();
+    }
+  });
+  
+  const form = popup.querySelector('[data-popup-form]');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const discountCode = 'COMEBACK10';
+      
+      popup.querySelector('.aurea-exit-popup__content').innerHTML = `
+        <div style="padding: 32px 0; text-align: center;">
+          <h2 style="font-family: var(--font-heading--family, 'Playfair Display', serif); font-size: 1.5rem; font-weight: 500; margin: 0 0 16px; color: #1A1A1A;">You're in</h2>
+          <p style="color: #666; margin: 0 0 24px; font-size: 0.95rem;">Your discount code:</p>
+          <div style="background: #F8F8F8; padding: 20px; border: 1px dashed #B8860B; margin-bottom: 24px;">
+            <span style="font-family: monospace; font-size: 1.25rem; font-weight: 600; letter-spacing: 0.15em; color: #1A1A1A;">${discountCode}</span>
+          </div>
+          <p style="font-size: 0.8rem; color: #999;">Code copied to clipboard</p>
+        </div>
+      `;
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(discountCode);
+      }
+      
+      setTimeout(hidePopup, 4000);
+    });
+  }
+  
+  if (!hasBeenShown()) {
+    let triggered = false;
+    
+    document.addEventListener('mouseout', (e) => {
+      if (triggered) return;
+      if (e.clientY <= 0 && e.relatedTarget === null) {
+        triggered = true;
+        setTimeout(showPopup, 100);
+      }
+    });
+    
+    let lastScrollY = window.scrollY;
+    let scrollUpCount = 0;
+    
+    window.addEventListener('scroll', () => {
+      if (triggered) return;
+      
+      const currentY = window.scrollY;
+      
+      if (currentY < lastScrollY && currentY < 100) {
+        scrollUpCount++;
+        if (scrollUpCount > 3) {
+          triggered = true;
+          showPopup();
+        }
+      } else {
+        scrollUpCount = 0;
+      }
+      
+      lastScrollY = currentY;
+    }, { passive: true });
+  }
+})();
+</script>
+{%- endif -%}

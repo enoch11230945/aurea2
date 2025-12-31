@@ -1,0 +1,213 @@
+{%- comment -%}
+  AUREA Trust Bar
+  Premium trust badges with gold SVG icons
+  No emojis - professional SVG icons only
+{%- endcomment -%}
+
+<section class="aurea-trust-bar">
+  <div class="page-width">
+    <div class="aurea-trust-bar__items">
+      
+      {% for block in section.blocks %}
+        <div class="aurea-trust-bar__badge" {{ block.shopify_attributes }}>
+          <span class="aurea-trust-bar__icon">
+            {%- case block.settings.icon_type -%}
+              {%- when 'truck' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="1" y="3" width="15" height="13" rx="1"/>
+                  <path d="M16 8h4l3 3v5h-7V8z"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/>
+                  <circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              {%- when 'droplet' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+              {%- when 'infinity' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.873 0-4.873 8 0 8 5.606 0 7.644-8 12.74-8z"/>
+                </svg>
+              {%- when 'gift' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="8" width="18" height="13" rx="2"/>
+                  <path d="M12 8V21"/>
+                  <path d="M3 12h18"/>
+                  <path d="M12 8c-2-3-1.5-5 0-5s2 2 0 5"/>
+                  <path d="M12 8c2-3 1.5-5 0-5s-2 2 0 5"/>
+                </svg>
+              {%- when 'shield' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              {%- when 'star' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              {%- when 'heart' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              {%- when 'lock' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              {%- when 'diamond' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M6 3h12l4 6-10 13L2 9z"/>
+                  <path d="M2 9h20"/>
+                  <path d="M12 22l4-13M12 22l-4-13"/>
+                </svg>
+              {%- when 'leaf' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+              {%- when 'clock' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              {%- when 'check' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              {%- else -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+            {%- endcase -%}
+          </span>
+          <span class="aurea-trust-bar__text">{{ block.settings.text }}</span>
+        </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  .aurea-trust-bar {
+    background: #0D0D0D;
+    color: #FFFFFF;
+    padding: 1.75rem 1rem;
+  }
+  
+  .aurea-trust-bar__items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .aurea-trust-bar__badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+  }
+  
+  .aurea-trust-bar__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B8860B;
+  }
+  
+  .aurea-trust-bar__text {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  @media (max-width: 768px) {
+    .aurea-trust-bar__items {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .aurea-trust-bar__badge {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Delivery Truck" },
+            { "value": "droplet", "label": "Waterproof" },
+            { "value": "infinity", "label": "Lifetime / Infinity" },
+            { "value": "gift", "label": "Gift Box" },
+            { "value": "shield", "label": "Shield / Protection" },
+            { "value": "star", "label": "Star / Quality" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "lock", "label": "Lock / Secure" },
+            { "value": "diamond", "label": "Diamond / Premium" },
+            { "value": "leaf", "label": "Leaf / Eco" },
+            { "value": "clock", "label": "Clock / Fast" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free UK Shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "truck",
+            "text": "Royal Mail Tracked"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "droplet",
+            "text": "100% Waterproof"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "infinity",
+            "text": "Lifetime Warranty"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon_type": "gift",
+            "text": "Gift Ready Packaging"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

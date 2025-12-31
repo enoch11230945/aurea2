@@ -1,0 +1,199 @@
+{%- comment -%}
+  Gift Message Input for Product Page
+  
+  CRITICAL: Uses Line Item Properties (not Cart Notes)
+  This binds the message to the specific LINE ITEM, not the entire cart.
+  Required for "one order, multiple gifts" scenario per PRD v2.0.
+  
+  Usage: {% render 'gift-message-property', form_id: 'product-form-123' %}
+  
+  The form_id MUST match the product form's ID for the value to submit correctly.
+{%- endcomment -%}
+
+<div class="aurea-gift-property" data-gift-wrapper>
+  <details class="aurea-gift-property__details">
+    <summary class="aurea-gift-property__summary" aria-expanded="false" role="button">
+      <span class="aurea-gift-property__icon" aria-hidden="true">🎁</span>
+      <span class="aurea-gift-property__label">Add a Free Gift Message</span>
+      <span class="aurea-gift-property__toggle" aria-hidden="true">+</span>
+    </summary>
+    
+    <div class="aurea-gift-property__content">
+      {%- comment -%} 
+        Hidden checkbox to mark this as a gift 
+        Leading underscore hides it from customer-facing order confirmation 
+      {%- endcomment -%}
+      <input 
+        type="hidden" 
+        name="properties[_Is Gift]" 
+        value="Yes"
+        form="{{ form_id }}"
+        disabled
+        data-gift-flag
+      >
+      
+      <label for="gift-message-{{ form_id }}" class="visually-hidden">
+        Gift Message
+      </label>
+      
+      <textarea 
+        id="gift-message-{{ form_id }}"
+        name="properties[Gift Message]"
+        class="aurea-gift-property__textarea"
+        placeholder="Write your heartfelt message here...&#10;&#10;e.g., 'To my love, you mean everything to me...'"
+        maxlength="200"
+        aria-label="Gift message for this item"
+        form="{{ form_id }}"
+        disabled
+        data-gift-textarea
+      ></textarea>
+      
+      <div class="aurea-gift-property__footer">
+        <span class="aurea-gift-property__hint">
+          ✨ We'll hand-write this on a premium card and place it inside the box.
+        </span>
+        <span class="aurea-gift-property__counter" data-char-counter>
+          <span data-char-count>0</span>/200
+        </span>
+      </div>
+    </div>
+  </details>
+</div>
+
+<style>
+  .aurea-gift-property {
+    margin: 1rem 0;
+    border: 1px dashed rgba(184, 134, 11, 0.4);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.03) 0%, rgba(184, 134, 11, 0.01) 100%);
+    overflow: hidden;
+  }
+  
+  .aurea-gift-property__details {
+    width: 100%;
+  }
+  
+  .aurea-gift-property__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-foreground, #1A1A1A);
+  }
+  
+  .aurea-gift-property__summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .aurea-gift-property__icon {
+    font-size: 1.1rem;
+  }
+  
+  .aurea-gift-property__label {
+    flex: 1;
+  }
+  
+  .aurea-gift-property__toggle {
+    font-size: 1.2rem;
+    color: #B8860B;
+    transition: transform 0.2s ease;
+    font-weight: 300;
+  }
+  
+  .aurea-gift-property__details[open] .aurea-gift-property__toggle {
+    transform: rotate(45deg);
+  }
+  
+  .aurea-gift-property__content {
+    padding: 0 1rem 1rem 1rem;
+  }
+  
+  .aurea-gift-property__textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+    background: #fff;
+  }
+  
+  .aurea-gift-property__textarea:focus {
+    outline: none;
+    border-color: #B8860B;
+    box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.1);
+  }
+  
+  .aurea-gift-property__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .aurea-gift-property__hint {
+    color: rgba(26, 26, 26, 0.6);
+    font-style: italic;
+    flex: 1;
+  }
+  
+  .aurea-gift-property__counter {
+    color: rgba(26, 26, 26, 0.5);
+    margin-left: 1rem;
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Find this specific gift wrapper instance
+  const wrapper = document.currentScript.closest('[data-gift-wrapper]') 
+    || document.querySelector('[data-gift-wrapper]:not([data-initialized])');
+  
+  if (!wrapper || wrapper.hasAttribute('data-initialized')) return;
+  wrapper.setAttribute('data-initialized', 'true');
+  
+  const details = wrapper.querySelector('details');
+  const textarea = wrapper.querySelector('[data-gift-textarea]');
+  const giftFlag = wrapper.querySelector('[data-gift-flag]');
+  const charCount = wrapper.querySelector('[data-char-count]');
+  const summary = wrapper.querySelector('summary');
+  
+  if (!details || !textarea || !giftFlag) return;
+  
+  // Enable/disable form fields based on details open state
+  details.addEventListener('toggle', function() {
+    const isOpen = details.open;
+    
+    // Enable inputs only when section is open
+    textarea.disabled = !isOpen;
+    giftFlag.disabled = !isOpen;
+    
+    // Update aria-expanded
+    if (summary) {
+      summary.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    
+    // Focus textarea when opened
+    if (isOpen && textarea) {
+      setTimeout(() => textarea.focus(), 100);
+    }
+  });
+  
+  // Character counter
+  if (textarea && charCount) {
+    textarea.addEventListener('input', function() {
+      charCount.textContent = textarea.value.length;
+    });
+  }
+})();
+</script>

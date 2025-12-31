@@ -1,0 +1,694 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "none",
+            "slideshow_controls_style": "counter",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 20,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-1",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_inventory_aurea": {
+              "type": "product-inventory",
+              "settings": {
+                "inventory_threshold": 10,
+                "show_inventory_quantity": true,
+                "padding-block-start": 0,
+                "padding-block-end": 4,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "live_viewers_aurea": {
+              "type": "live-viewer-count",
+              "settings": {
+                "min_viewers": 12,
+                "max_viewers": 45,
+                "update_seconds": 12,
+                "text_after": "people are viewing this right now",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "judge_me_reviews_badge": {
+              "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+              "settings": {}
+            },
+            "product_title": {
+              "type": "text",
+              "name": "Product title",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "price_main": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": true,
+                "show_tax_info": false,
+                "type_preset": "paragraph",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1.1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 4,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "divider_1": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 4,
+                "padding-block-end": 4
+              }
+            },
+            "variant_picker_main": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": true,
+                "alignment": "left",
+                "padding-block-start": 8,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "delivery_estimator_aurea": {
+              "type": "delivery-estimator",
+              "settings": {
+                "label_text": "Order now to receive by",
+                "fallback_text": "2-3 Business Days",
+                "cutoff_hour": 14,
+                "min_delivery_days": 2,
+                "max_delivery_days": 3,
+                "show_cutoff": true,
+                "padding-block-start": 8,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "buy_buttons_main": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  }
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {}
+                }
+              },
+              "block_order": []
+            },
+            "gift_message_aurea": {
+              "type": "gift-message",
+              "settings": {
+                "button_text": "Add a Free Gift Message",
+                "placeholder": "Write your heartfelt message here...\n\ne.g., 'To my love, you mean everything to me...'",
+                "hint_text": "We'll hand-write this on a premium card and place it inside the box.",
+                "max_length": 200,
+                "padding-block-start": 12,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "trust_delivery_aurea": {
+              "type": "trust-delivery",
+              "settings": {}
+            },
+            "divider_2": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 12,
+                "padding-block-end": 4
+              }
+            },
+            "accordion_details": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "type_preset": "h6",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_description": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Description",
+                    "open_by_default": true
+                  },
+                  "blocks": {
+                    "text_desc": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.description }}"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "text_desc"
+                  ]
+                },
+                "accordion_materials": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Materials & Care"
+                  },
+                  "blocks": {
+                    "text_materials": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>Material:</strong> 316L Surgical Stainless Steel with 18K Gold PVD coating</p><p><strong>Stone:</strong> AAAA Grade Cubic Zirconia</p><p><strong>Finish:</strong> Waterproof, sweatproof, hypoallergenic</p><p><strong>Care:</strong> Wipe with soft cloth. Safe for daily wear including shower and exercise.</p>"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "text_materials"
+                  ]
+                },
+                "accordion_shipping": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Shipping & Returns"
+                  },
+                  "blocks": {
+                    "text_shipping": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>UK Delivery:</strong> 2-3 business days via Royal Mail Tracked</p><p><strong>Free Shipping:</strong> On orders over £50</p><p><strong>Returns:</strong> 30-day hassle-free returns, no questions asked</p><p><strong>Warranty:</strong> Lifetime warranty on all pieces</p>"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "text_shipping"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_description",
+                "accordion_materials",
+                "accordion_shipping"
+              ]
+            }
+          },
+          "block_order": [
+            "product_inventory_aurea",
+            "live_viewers_aurea",
+            "judge_me_reviews_badge",
+            "product_title",
+            "price_main",
+            "divider_1",
+            "variant_picker_main",
+            "delivery_estimator_aurea",
+            "buy_buttons_main",
+            "gift_message_aurea",
+            "trust_delivery_aurea",
+            "divider_2",
+            "accordion_details"
+          ]
+        }
+      },
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "trust_bar": {
+      "type": "section-trust-bar",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "icon_type": "truck",
+            "text": "Royal Mail Tracked"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "icon_type": "droplet",
+            "text": "100% Waterproof"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "icon_type": "infinity",
+            "text": "Lifetime Warranty"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "icon_type": "gift",
+            "text": "Gift Ready Packaging"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
+      "settings": {}
+    },
+    "material_science": {
+      "type": "section-material-science",
+      "blocks": {
+        "spec_1": {
+          "type": "spec",
+          "settings": {
+            "icon_type": "diamond",
+            "title": "The Stone",
+            "description": "AAAA Grade Cubic Zirconia (Diamond Simulant)"
+          }
+        },
+        "spec_2": {
+          "type": "spec",
+          "settings": {
+            "icon_type": "chain",
+            "title": "The Metal",
+            "description": "316L Surgical Stainless Steel (Hypoallergenic)"
+          }
+        },
+        "spec_3": {
+          "type": "spec",
+          "settings": {
+            "icon_type": "droplet",
+            "title": "The Finish",
+            "description": "18K Real Gold PVD (Waterproof & Sweatproof)"
+          }
+        }
+      },
+      "block_order": [
+        "spec_1",
+        "spec_2",
+        "spec_3"
+      ],
+      "settings": {
+        "preheading": "Why It Lasts",
+        "heading": "The Science of Forever"
+      }
+    },
+    "reviews_section": {
+      "type": "_blocks",
+      "blocks": {
+        "judge_me_carousel": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true
+          }
+        },
+        "judge_me_all_reviews": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "max_width": 1200,
+            "review_source": "all",
+            "show_tabs": false,
+            "show_first": "product",
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_carousel",
+        "judge_me_all_reviews"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "product_recommendations": {
+      "type": "product-recommendations",
+      "blocks": {
+        "recommendations_header": {
+          "type": "text",
+          "name": "Header",
+          "settings": {
+            "text": "<h3>Complete Your Look</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "product_card": {
+          "type": "_product-card",
+          "name": "Product Card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "product_title_card": {
+              "type": "product-title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "price_card": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": [
+            "product_card_gallery",
+            "product_title_card",
+            "price_card"
+          ]
+        }
+      },
+      "block_order": [
+        "recommendations_header"
+      ],
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "product_info_tabs": {
+      "type": "section-product-info-tabs",
+      "blocks": {
+        "tab_details": {
+          "type": "tab",
+          "settings": {
+            "title": "DETAILS & SPECIFICATIONS",
+            "heading": "The Finer Details",
+            "icon": "info",
+            "content": "<p>Crafted for the modern minimalist. Every Aurea piece is designed to combine timeless elegance with everyday durability.</p><p><strong>Material:</strong> 18K Gold Plated on Premium Stainless Steel (PVD Coated).</p><p><strong>Durability:</strong> 100% Tarnish-Free. Water, Sweat, and Heat Resistant.</p><p><strong>Hypoallergenic:</strong> No nickel, no lead. Safe for sensitive skin.</p><p><strong>Weight:</strong> Designed for all-day comfort.</p><p><strong>Packaging:</strong> Comes in our signature eco-friendly luxury pouch.</p>"
+          }
+        },
+        "tab_delivery": {
+          "type": "tab",
+          "settings": {
+            "title": "DELIVERY & RETURNS",
+            "heading": "Shipping & Pre-order",
+            "icon": "truck",
+            "content": "<p>As an independent studio, we operate in small batches to ensure the highest quality and minimize waste.</p><p><strong>Processing Time:</strong> Due to high demand, please allow 7-12 working days for your order to be prepared and dispatched.</p><p><strong>UK Delivery:</strong> Sent via Royal Mail (Tracked). Arrives in 2-3 days after dispatch.</p><p><strong>Returns:</strong> We offer a 14-day return window for unworn items.</p><p><strong>Worth the Wait:</strong> Good things take time. We promise it will be worth it. ✨</p>"
+          }
+        },
+        "tab_quality": {
+          "type": "tab",
+          "settings": {
+            "title": "QUALITY & MATERIALS",
+            "heading": "Our Promise",
+            "icon": "diamond",
+            "content": "<p>Quality is non-negotiable. Unlike standard fashion jewelry, Aurea pieces are designed to last.</p><p><strong>Waterproof Technology:</strong> We use advanced PVD Plating technology. This ensures the gold color is bonded to the metal, making it vibrant and resistant to fading—even in the shower or gym.</p><p><strong>Skin Friendly:</strong> No green necks, ever.</p><p><strong>Warranty:</strong> We stand by our quality with a 2-Year Color Warranty. If it fades, we replace it.</p>"
+          }
+        },
+        "tab_care": {
+          "type": "tab",
+          "settings": {
+            "title": "JEWELLERY CARE",
+            "heading": "Love Your Jewelry",
+            "icon": "heart",
+            "content": "<p>While our pieces are crafted from durable Stainless Steel and designed to be water-resistant, a little love goes a long way.</p><p><strong>The Golden Rule:</strong> Last on, first off. Put your jewelry on after applying perfumes, lotions, or hairspray.</p><p><strong>Keep it Clean:</strong> Gently wipe your pieces with a soft cloth after wear to remove natural oils.</p><p><strong>Storage:</strong> Store in your Aurea pouch or a dry jewelry box to prevent scratches.</p><p><strong>Chemicals:</strong> Avoid direct contact with bleach or strong cleaning agents to maintain the shine.</p>"
+          }
+        },
+        "tab_gifting": {
+          "type": "tab",
+          "settings": {
+            "title": "GIFTING OPTIONS",
+            "heading": "Unboxing Experience",
+            "icon": "gift",
+            "content": "<p>As the home of personalised gifting, we believe in creating moments that show just how much you care.</p><p><strong>Gift-Ready:</strong> Every Aurea piece comes wrapped with love in our recyclable luxury packaging.</p><p><strong>No Price Tags:</strong> We do not include invoices or price tags inside the package, so you can ship directly to your loved one with peace of mind.</p><p><strong>Free Personalised Note:</strong> Want to make it extra special? Simply leave a note at checkout (\"Order Note\"), and we will print your custom message on a card and include it in the box—completely free of charge. ✨</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tab_details",
+        "tab_delivery",
+        "tab_quality",
+        "tab_care",
+        "tab_gifting"
+      ],
+      "settings": {
+        "tab_alignment": "center",
+        "active_tab_color": "#B8860B",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "trust_bar",
+    "product_info_tabs",
+    "material_science",
+    "reviews_section",
+    "product_recommendations"
+  ]
+}

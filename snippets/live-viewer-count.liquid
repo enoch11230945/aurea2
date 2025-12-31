@@ -1,0 +1,122 @@
+{%- comment -%}
+  AUREA Live Viewer Count
+  
+  Creates social proof by showing how many people are viewing the product.
+  Uses realistic randomization within configured bounds.
+  
+  Usage: {% render 'live-viewer-count', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign min_viewers = 8
+  assign max_viewers = 35
+  assign update_interval = 15000
+-%}
+
+<div 
+  class="aurea-live-viewers"
+  data-live-viewers
+  data-min="{{ min_viewers }}"
+  data-max="{{ max_viewers }}"
+  data-update-interval="{{ update_interval }}"
+>
+  <span class="aurea-live-viewers__pulse" aria-hidden="true"></span>
+  <span class="aurea-live-viewers__text">
+    <strong data-viewer-count>{{ min_viewers | plus: 5 }}</strong> people are viewing this right now
+  </span>
+</div>
+
+<style>
+  .aurea-live-viewers {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(184, 134, 11, 0.06);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--color-foreground, #1A1A1A);
+    margin: 8px 0;
+  }
+  
+  .aurea-live-viewers__pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .aurea-live-viewers__pulse::before,
+  .aurea-live-viewers__pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #B8860B;
+  }
+  
+  .aurea-live-viewers__pulse::before {
+    animation: aurea-live-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .aurea-live-viewers__text strong {
+    color: #B8860B;
+    font-weight: 700;
+  }
+  
+  @keyframes aurea-live-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  function init() {
+    const containers = document.querySelectorAll('[data-live-viewers]:not([data-initialized])');
+    
+    containers.forEach(container => {
+      container.setAttribute('data-initialized', 'true');
+      
+      const countEl = container.querySelector('[data-viewer-count]');
+      if (!countEl) return;
+      
+      const min = parseInt(container.dataset.min, 10) || 8;
+      const max = parseInt(container.dataset.max, 10) || 35;
+      const interval = parseInt(container.dataset.updateInterval, 10) || 15000;
+      
+      let currentCount = Math.floor(Math.random() * (max - min + 1)) + min;
+      countEl.textContent = currentCount;
+      
+      // Realistic random walk: change by -2 to +3 each interval
+      setInterval(() => {
+        const change = Math.floor(Math.random() * 6) - 2; // -2 to +3
+        currentCount = Math.max(min, Math.min(max, currentCount + change));
+        
+        // Smooth transition effect
+        countEl.style.transform = 'scale(1.15)';
+        countEl.textContent = currentCount;
+        
+        setTimeout(() => {
+          countEl.style.transform = 'scale(1)';
+        }, 200);
+      }, interval);
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  document.addEventListener('shopify:section:load', init);
+})();
+</script>

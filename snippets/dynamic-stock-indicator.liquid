@@ -1,0 +1,313 @@
+{%- comment -%}
+  Dynamic Low Stock Indicator (Variant-Aware)
+  
+  CRITICAL FIX: This version registers for variant change events
+  and updates the inventory display dynamically.
+  
+  The static Liquid rendering provides the INITIAL state.
+  JavaScript handles SUBSEQUENT variant changes.
+  
+  Usage: {% render 'dynamic-stock-indicator', product: product, section_id: section.id %}
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign inventory = current_variant.inventory_quantity
+  assign low_threshold = 10
+  assign high_demand_threshold = 30
+  
+  assign state = 'normal'
+  assign show_indicator = false
+  
+  if current_variant.inventory_management == 'shopify' and current_variant.available
+    if inventory <= 0
+      assign state = 'sold-out'
+    elsif inventory <= low_threshold
+      assign state = 'low'
+      assign show_indicator = true
+    elsif inventory <= high_demand_threshold
+      assign state = 'demand'
+      assign show_indicator = true
+    else
+      assign state = 'available'
+    endif
+  elsif current_variant.available == false
+    assign state = 'sold-out'
+  endif
+-%}
+
+<div 
+  class="aurea-stock-indicator" 
+  id="StockIndicator-{{ section_id }}"
+  data-product-url="{{ product.url }}.json"
+  data-threshold-low="{{ low_threshold }}"
+  data-threshold-demand="{{ high_demand_threshold }}"
+  data-current-variant-id="{{ current_variant.id }}"
+  data-stock-indicator
+>
+  {%- case state -%}
+    {%- when 'low' -%}
+      <div class="aurea-stock aurea-stock--low" data-stock-content>
+        <span class="aurea-stock__dot-wrapper">
+          <span class="aurea-stock__dot-ping"></span>
+          <span class="aurea-stock__dot-core"></span>
+        </span>
+        <span class="aurea-stock__text">Only <strong data-stock-qty>{{ inventory }}</strong> left in stock</span>
+      </div>
+    {%- when 'demand' -%}
+      <div class="aurea-stock aurea-stock--demand" data-stock-content>
+        <span class="aurea-stock__icon">🔥</span>
+        <span class="aurea-stock__text">High Demand – Selling Fast</span>
+      </div>
+    {%- when 'available' -%}
+      <div class="aurea-stock aurea-stock--available" data-stock-content>
+        <span class="aurea-stock__icon">✓</span>
+        <span class="aurea-stock__text">In Stock – Ready to Ship</span>
+      </div>
+    {%- when 'sold-out' -%}
+      <div class="aurea-stock aurea-stock--soldout" data-stock-content>
+        <span class="aurea-stock__text">Currently Sold Out</span>
+      </div>
+    {%- else -%}
+      <div class="aurea-stock aurea-stock--hidden" data-stock-content style="display: none;"></div>
+  {%- endcase -%}
+</div>
+
+<style>
+  .aurea-stock-indicator {
+    min-height: 28px;
+  }
+  
+  .aurea-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .aurea-stock--low {
+    background: rgba(185, 28, 28, 0.08);
+    color: #B91C1C;
+  }
+  
+  .aurea-stock--demand {
+    background: rgba(217, 119, 6, 0.08);
+    color: #D97706;
+  }
+  
+  .aurea-stock--available {
+    background: rgba(22, 163, 74, 0.08);
+    color: #16A34A;
+  }
+  
+  .aurea-stock--soldout {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(26, 26, 26, 0.5);
+  }
+  
+  .aurea-stock--hidden {
+    display: none !important;
+  }
+  
+  .aurea-stock__dot-wrapper {
+    position: relative;
+    display: flex;
+    height: 8px;
+    width: 8px;
+  }
+  
+  .aurea-stock__dot-ping {
+    animation: aurea-stock-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #EF4444;
+    opacity: 0.75;
+  }
+  
+  .aurea-stock__dot-core {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    background-color: #B91C1C;
+  }
+  
+  .aurea-stock__icon {
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+  
+  @keyframes aurea-stock-ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const indicator = document.querySelector('[data-stock-indicator]:not([data-stock-initialized])');
+  if (!indicator) return;
+  indicator.setAttribute('data-stock-initialized', 'true');
+  
+  const productUrl = indicator.dataset.productUrl;
+  const lowThreshold = parseInt(indicator.dataset.thresholdLow, 10) || 10;
+  const demandThreshold = parseInt(indicator.dataset.thresholdDemand, 10) || 30;
+  
+  let productData = null;
+  let variantsMap = {};
+  
+  // Pre-fetch product data for variant inventory lookup
+  async function fetchProductData() {
+    if (productData) return productData;
+    
+    try {
+      const response = await fetch(productUrl);
+      if (!response.ok) throw new Error('Product fetch failed');
+      
+      const data = await response.json();
+      productData = data.product;
+      
+      // Build variant ID -> variant lookup map
+      productData.variants.forEach(v => {
+        variantsMap[v.id] = v;
+      });
+      
+      return productData;
+    } catch (e) {
+      console.warn('[StockIndicator] Could not fetch product data:', e);
+      return null;
+    }
+  }
+  
+  // Render the appropriate stock state
+  function renderState(state, quantity) {
+    const contentEl = indicator.querySelector('[data-stock-content]');
+    if (!contentEl) return;
+    
+    let html = '';
+    
+    switch (state) {
+      case 'low':
+        html = `
+          <div class="aurea-stock aurea-stock--low" data-stock-content>
+            <span class="aurea-stock__dot-wrapper">
+              <span class="aurea-stock__dot-ping"></span>
+              <span class="aurea-stock__dot-core"></span>
+            </span>
+            <span class="aurea-stock__text">Only <strong data-stock-qty>${quantity}</strong> left in stock</span>
+          </div>
+        `;
+        break;
+      case 'demand':
+        html = `
+          <div class="aurea-stock aurea-stock--demand" data-stock-content>
+            <span class="aurea-stock__icon">🔥</span>
+            <span class="aurea-stock__text">High Demand – Selling Fast</span>
+          </div>
+        `;
+        break;
+      case 'available':
+        html = `
+          <div class="aurea-stock aurea-stock--available" data-stock-content>
+            <span class="aurea-stock__icon">✓</span>
+            <span class="aurea-stock__text">In Stock – Ready to Ship</span>
+          </div>
+        `;
+        break;
+      case 'sold-out':
+        html = `
+          <div class="aurea-stock aurea-stock--soldout" data-stock-content>
+            <span class="aurea-stock__text">Currently Sold Out</span>
+          </div>
+        `;
+        break;
+      default:
+        html = `<div class="aurea-stock aurea-stock--hidden" data-stock-content style="display: none;"></div>`;
+    }
+    
+    indicator.innerHTML = html;
+  }
+  
+  // Determine state from inventory data
+  function getState(variant) {
+    if (!variant.available) {
+      return { state: 'sold-out', qty: 0 };
+    }
+    
+    // If inventory not tracked, assume available
+    if (variant.inventory_management !== 'shopify' && !variant.inventory_quantity) {
+      return { state: 'available', qty: 999 };
+    }
+    
+    const qty = variant.inventory_quantity;
+    
+    if (qty <= 0) {
+      return { state: 'sold-out', qty: 0 };
+    } else if (qty <= lowThreshold) {
+      return { state: 'low', qty: qty };
+    } else if (qty <= demandThreshold) {
+      return { state: 'demand', qty: qty };
+    } else {
+      return { state: 'available', qty: qty };
+    }
+  }
+  
+  // Handle variant change event
+  async function handleVariantChange(variantId) {
+    await fetchProductData();
+    
+    const variant = variantsMap[variantId];
+    if (!variant) {
+      console.warn('[StockIndicator] Variant not found:', variantId);
+      return;
+    }
+    
+    const { state, qty } = getState(variant);
+    renderState(state, qty);
+    
+    // Update data attribute for debugging
+    indicator.dataset.currentVariantId = variantId;
+  }
+  
+  // Listen for Shopify's standard variant change events
+  // Multiple event types for compatibility with different themes
+  document.addEventListener('variant:changed', (e) => {
+    const variantId = e.detail?.variant?.id || e.detail?.id;
+    if (variantId) handleVariantChange(variantId);
+  });
+  
+  // Shopify's Dawn theme pattern: URL change detection
+  const observer = new MutationObserver(() => {
+    const params = new URLSearchParams(window.location.search);
+    const variantId = params.get('variant');
+    if (variantId && variantId !== indicator.dataset.currentVariantId) {
+      handleVariantChange(parseInt(variantId, 10));
+    }
+  });
+  
+  // Observe URL changes (for themes that update URL on variant change)
+  if (typeof window !== 'undefined') {
+    // Fallback: poll URL for variant changes
+    let lastVariant = indicator.dataset.currentVariantId;
+    setInterval(() => {
+      const params = new URLSearchParams(window.location.search);
+      const variantId = params.get('variant');
+      if (variantId && variantId !== lastVariant) {
+        lastVariant = variantId;
+        handleVariantChange(parseInt(variantId, 10));
+      }
+    }, 250);
+  }
+  
+  // Pre-fetch product data on load for faster variant switching
+  fetchProductData();
+})();
+</script>

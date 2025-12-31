@@ -1,0 +1,233 @@
+/* AUREA Product Info Tabs/Accordion
+   Desktop: Tabs | Mobile: Accordion
+   ---------------------------------- */
+
+.product-info-tabs {
+    padding-top: var(--padding-top, 48px);
+    padding-bottom: var(--padding-bottom, 48px);
+    background: var(--color-background, #FAF8F5);
+}
+
+/* =========================
+   Desktop: Tab Navigation
+   ========================= */
+.product-info-tabs__nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 1px solid #E8E4DF;
+    margin-bottom: 2rem;
+}
+
+.product-info-tabs__tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.6);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.product-info-tabs__tab:hover {
+    color: #1A1A1A;
+}
+
+.product-info-tabs__tab--active {
+    color: var(--active-color, #B8860B);
+    border-bottom-color: var(--active-color, #B8860B);
+}
+
+.product-info-tabs__icon {
+    display: flex;
+    align-items: center;
+    color: inherit;
+}
+
+.product-info-tabs__tab-text {
+    display: inline;
+}
+
+/* =========================
+   Desktop: Tab Panels
+   ========================= */
+.product-info-tabs__panels {
+    display: block;
+}
+
+.product-info-tabs__panel {
+    display: none;
+    animation: fadeInTab 0.3s ease;
+}
+
+.product-info-tabs__panel--active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Shared Content Styles
+   ========================= */
+.product-info-tabs__heading {
+    font-family: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #1A1A1A;
+    margin: 0 0 1rem;
+}
+
+.product-info-tabs__content {
+    font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(26, 26, 26, 0.8);
+    max-width: 800px;
+}
+
+.product-info-tabs__content p {
+    margin: 0 0 1rem;
+}
+
+.product-info-tabs__content p:last-child {
+    margin-bottom: 0;
+}
+
+.product-info-tabs__content strong {
+    color: #1A1A1A;
+    font-weight: 600;
+}
+
+.product-info-tabs__image {
+    margin-top: 1.5rem;
+}
+
+.product-info-tabs__image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* =========================
+   Mobile: Accordion (Hidden on Desktop)
+   ========================= */
+.product-info-tabs__accordion {
+    display: none;
+}
+
+/* =========================
+   Mobile Breakpoint
+   ========================= */
+@media (max-width: 768px) {
+
+    /* Hide desktop tabs */
+    .product-info-tabs__nav,
+    .product-info-tabs__panels {
+        display: none;
+    }
+
+    /* Show mobile accordion */
+    .product-info-tabs__accordion {
+        display: block;
+    }
+
+    .product-info-tabs__accordion-item {
+        border-bottom: 1px solid #E8E4DF;
+    }
+
+    .product-info-tabs__accordion-item:first-child {
+        border-top: 1px solid #E8E4DF;
+    }
+
+    .product-info-tabs__accordion-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 1.25rem 0;
+        background: none;
+        cursor: pointer;
+        list-style: none;
+        font-family: var(--font-body--family, 'Cormorant', Georgia, serif);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #1A1A1A;
+    }
+
+    .product-info-tabs__accordion-header::-webkit-details-marker {
+        display: none;
+    }
+
+    .product-info-tabs__accordion-icon {
+        display: flex;
+        align-items: center;
+        color: var(--active-color, #B8860B);
+    }
+
+    .product-info-tabs__accordion-title {
+        flex: 1;
+    }
+
+    .product-info-tabs__accordion-toggle {
+        display: flex;
+        align-items: center;
+        color: var(--active-color, #B8860B);
+    }
+
+    .product-info-tabs__accordion-plus-v {
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        transform-origin: center;
+    }
+
+    .product-info-tabs__accordion-item[open] .product-info-tabs__accordion-plus-v {
+        transform: rotate(90deg);
+        opacity: 0;
+    }
+
+    .product-info-tabs__accordion-content {
+        padding: 0 0 1.5rem 2.5rem;
+    }
+
+    .product-info-tabs__heading {
+        font-size: 1.25rem;
+    }
+
+    .product-info-tabs__content {
+        font-size: 0.9rem;
+    }
+}
+
+/* =========================
+   Tablet Adjustments
+   ========================= */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .product-info-tabs__tab {
+        padding: 1rem;
+        font-size: 0.7rem;
+    }
+
+    .product-info-tabs__tab-text {
+        display: inline;
+    }
+}

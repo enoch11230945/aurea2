@@ -1,0 +1,224 @@
+{%- comment -%}
+  AUREA Live Viewer Count Block
+  
+  For use inside product-details as a Block.
+  Shows how many people are viewing the product.
+  
+  Creates FOMO and social proof.
+{%- endcomment -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign min_viewers = block_settings.min_viewers | default: 8
+  assign max_viewers = block_settings.max_viewers | default: 35
+  assign update_interval = block_settings.update_seconds | times: 1000 | default: 15000
+-%}
+
+<div 
+  class="aurea-live-block spacing-style"
+  style="{% render 'spacing-style', settings: block_settings %}"
+  {{ block.shopify_attributes }}
+  data-live-viewers-block
+  data-min="{{ min_viewers }}"
+  data-max="{{ max_viewers }}"
+  data-update-interval="{{ update_interval }}"
+>
+  <div class="aurea-live-block__inner">
+    <span class="aurea-live-block__pulse" aria-hidden="true"></span>
+    <span class="aurea-live-block__text">
+      <strong data-viewer-count>{{ min_viewers | plus: 7 }}</strong> {{ block_settings.text_after | default: 'people viewing this right now' }}
+    </span>
+  </div>
+</div>
+
+{% stylesheet %}
+  .aurea-live-block__inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(184, 134, 11, 0.06);
+    border-radius: 24px;
+    font-size: var(--font-paragraph--size, 0.85rem);
+    color: var(--color-foreground, #1A1A1A);
+  }
+  
+  .aurea-live-block__pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+  }
+  
+  .aurea-live-block__pulse::before,
+  .aurea-live-block__pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #B8860B;
+  }
+  
+  .aurea-live-block__pulse::before {
+    animation: aurea-block-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .aurea-live-block__text strong {
+    color: #B8860B;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 1.5em;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  @keyframes aurea-block-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+(function() {
+  'use strict';
+  
+  function init() {
+    const containers = document.querySelectorAll('[data-live-viewers-block]:not([data-initialized])');
+    
+    containers.forEach(container => {
+      container.setAttribute('data-initialized', 'true');
+      
+      const countEl = container.querySelector('[data-viewer-count]');
+      if (!countEl) return;
+      
+      const min = parseInt(container.dataset.min, 10) || 8;
+      const max = parseInt(container.dataset.max, 10) || 35;
+      const interval = parseInt(container.dataset.updateInterval, 10) || 15000;
+      
+      // Start with random value
+      let currentCount = Math.floor(Math.random() * (max - min + 1)) + min;
+      countEl.textContent = currentCount;
+      
+      // Random walk: change by -2 to +3 each interval
+      setInterval(() => {
+        const change = Math.floor(Math.random() * 6) - 2;
+        currentCount = Math.max(min, Math.min(max, currentCount + change));
+        
+        // Pop animation
+        countEl.style.transform = 'scale(1.2)';
+        countEl.textContent = currentCount;
+        
+        setTimeout(() => {
+          countEl.style.transform = 'scale(1)';
+        }, 200);
+      }, interval);
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  document.addEventListener('shopify:section:load', init);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Live Viewer Count",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "min_viewers",
+      "label": "Minimum Viewers",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "max_viewers",
+      "label": "Maximum Viewers",
+      "min": 15,
+      "max": 100,
+      "step": 5,
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "update_seconds",
+      "label": "Update Interval (seconds)",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "text",
+      "id": "text_after",
+      "label": "Text After Number",
+      "default": "people viewing this right now"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Live Viewer Count",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

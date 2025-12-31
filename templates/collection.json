@@ -1,0 +1,165 @@
+{
+    "sections": {
+        "collection-banner": {
+            "type": "section",
+            "blocks": {
+                "collection_title": {
+                    "type": "text",
+                    "settings": {
+                        "text": "<h1>{{ closest.collection.title }}</h1>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "h1"
+                    }
+                },
+                "collection_description": {
+                    "type": "text",
+                    "settings": {
+                        "text": "{{ closest.collection.description }}",
+                        "width": "100%",
+                        "max_width": "narrow",
+                        "alignment": "center",
+                        "type_preset": "paragraph"
+                    }
+                }
+            },
+            "block_order": [
+                "collection_title",
+                "collection_description"
+            ],
+            "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "center",
+                "vertical_alignment": "center",
+                "gap": 16,
+                "section_width": "page-width",
+                "color_scheme": "scheme-1",
+                "padding-block-start": 48,
+                "padding-block-end": 24
+            }
+        },
+        "main": {
+            "type": "main-collection",
+            "blocks": {
+                "filters": {
+                    "type": "filters",
+                    "static": true,
+                    "settings": {
+                        "enable_filtering": true,
+                        "filter_style": "horizontal",
+                        "filter_width": "centered",
+                        "enable_sorting": true,
+                        "enable_grid_density": true,
+                        "inherit_color_scheme": true
+                    }
+                },
+                "product-card": {
+                    "type": "_product-card",
+                    "static": true,
+                    "settings": {
+                        "product_card_gap": 8,
+                        "inherit_color_scheme": true,
+                        "border": "none"
+                    },
+                    "blocks": {
+                        "card-gallery": {
+                            "type": "_product-card-gallery",
+                            "settings": {
+                                "image_ratio": "portrait",
+                                "border": "none"
+                            }
+                        },
+                        "product_title": {
+                            "type": "product-title",
+                            "settings": {
+                                "width": "100%",
+                                "alignment": "left",
+                                "type_preset": "rte"
+                            }
+                        },
+                        "price": {
+                            "type": "price",
+                            "settings": {
+                                "show_sale_price_first": true,
+                                "type_preset": "h6",
+                                "width": "100%",
+                                "alignment": "left"
+                            }
+                        }
+                    },
+                    "block_order": [
+                        "card-gallery",
+                        "product_title",
+                        "price"
+                    ]
+                }
+            },
+            "settings": {
+                "layout_type": "grid",
+                "product_card_size": "medium",
+                "mobile_product_card_size": "small",
+                "enable_infinite_scroll": true,
+                "products_per_page": 24,
+                "product_grid_width": "centered",
+                "full_width_on_mobile": true,
+                "columns_gap_horizontal": 24,
+                "columns_gap_vertical": 32,
+                "color_scheme": "scheme-1",
+                "padding-block-start": 24,
+                "padding-block-end": 48
+            }
+        },
+        "trust_bar": {
+            "type": "section",
+            "blocks": {
+                "quality_badge": {
+                    "type": "text",
+                    "settings": {
+                        "text": "<p><strong>💎 Waterproof Gold</strong><br/>18K PVD on Stainless Steel</p>",
+                        "alignment": "center",
+                        "type_preset": "paragraph"
+                    }
+                },
+                "delivery_badge": {
+                    "type": "text",
+                    "settings": {
+                        "text": "<p><strong>🚚 Tracked Delivery</strong><br/>Free shipping over £30</p>",
+                        "alignment": "center",
+                        "type_preset": "paragraph"
+                    }
+                },
+                "warranty_badge": {
+                    "type": "text",
+                    "settings": {
+                        "text": "<p><strong>🛡️ Lifetime Color Warranty</strong><br/>Will never turn green</p>",
+                        "alignment": "center",
+                        "type_preset": "paragraph"
+                    }
+                }
+            },
+            "block_order": [
+                "quality_badge",
+                "delivery_badge",
+                "warranty_badge"
+            ],
+            "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "center",
+                "vertical_alignment": "center",
+                "gap": 48,
+                "section_width": "page-width",
+                "color_scheme": "scheme-1",
+                "padding-block-start": 32,
+                "padding-block-end": 32
+            }
+        }
+    },
+    "order": [
+        "collection-banner",
+        "main",
+        "trust_bar"
+    ]
+}

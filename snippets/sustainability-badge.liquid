@@ -1,0 +1,73 @@
+{%- comment -%}
+  AUREA Sustainability Badge
+  
+  Shows eco-friendly and ethical commitments.
+  Can be placed in footer, product page, or cart.
+  
+  Usage: {% render 'sustainability-badge' %}
+{%- endcomment -%}
+
+<div class="aurea-sustainability">
+  <div class="aurea-sustainability__container">
+    <div class="aurea-sustainability__badge">
+      <span class="aurea-sustainability__icon">🌿</span>
+      <div class="aurea-sustainability__content">
+        <span class="aurea-sustainability__title">Committed to Sustainability</span>
+        <span class="aurea-sustainability__text">100% Recyclable Packaging • Ethically Sourced Materials</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .aurea-sustainability {
+    width: 100%;
+    padding: 12px 0;
+  }
+  
+  .aurea-sustainability__container {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--padding-lg, 20px);
+  }
+  
+  .aurea-sustainability__badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.04) 0%, rgba(34, 139, 34, 0.02) 100%);
+    border: 1px solid rgba(34, 139, 34, 0.12);
+    border-radius: 12px;
+  }
+  
+  .aurea-sustainability__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  
+  .aurea-sustainability__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .aurea-sustainability__title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #228B22;
+  }
+  
+  .aurea-sustainability__text {
+    font-size: 0.8rem;
+    color: rgba(26, 26, 26, 0.7);
+  }
+  
+  @media (max-width: 480px) {
+    .aurea-sustainability__badge {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
