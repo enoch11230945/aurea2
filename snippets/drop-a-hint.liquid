@@ -7,7 +7,7 @@
 
 {%- liquid
   assign product_url = shop.url | append: product.url
-  assign share_text = "Hey! I think I found the perfect gift... 💍✨"
+  assign share_text = "Hey! I think I found the perfect gift..."
   assign encoded_message = share_text | append: " " | append: product_url | url_encode
 -%}
 
@@ -29,7 +29,7 @@
     <span>Drop a Hint</span>
   </button>
   
-  <p class="aurea-hint-caption">Send to someone who should see this 😉</p>
+  <p class="aurea-hint-caption">Send to someone who should see this</p>
 </div>
 
 <script>
@@ -74,9 +74,9 @@
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    border: 2px solid #25D366;
+    border: 2px solid #B8860B;
     background: transparent;
-    color: #25D366;
+    color: #B8860B;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -85,7 +85,7 @@
   }
   
   .aurea-hint-btn:hover {
-    background: #25D366;
+    background: #B8860B;
     color: #FFF;
   }
   

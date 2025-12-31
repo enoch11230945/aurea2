@@ -56,12 +56,12 @@
       </div>
     {%- when 'demand' -%}
       <div class="aurea-stock aurea-stock--demand" data-stock-content>
-        <span class="aurea-stock__icon">🔥</span>
+        <span class="aurea-stock__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D97706" stroke="none"><path d="M12 2c-1.5 0-3 .5-4 2-2 3 0 7 2 10 1 1.5 2 4 2 6h2c0-2 1-4.5 2-6 2-3 4-7 2-10-1-1.5-2.5-2-4-2zm0 4c.5 0 1 .5 1 1.5s-.5 2-1 3c-.5-1-1-2-1-3s.5-1.5 1-1.5z"/></svg></span>
         <span class="aurea-stock__text">High Demand – Selling Fast</span>
       </div>
     {%- when 'available' -%}
       <div class="aurea-stock aurea-stock--available" data-stock-content>
-        <span class="aurea-stock__icon">✓</span>
+        <span class="aurea-stock__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
         <span class="aurea-stock__text">In Stock – Ready to Ship</span>
       </div>
     {%- when 'sold-out' -%}
@@ -209,7 +209,7 @@
       case 'demand':
         html = `
           <div class="aurea-stock aurea-stock--demand" data-stock-content>
-            <span class="aurea-stock__icon">🔥</span>
+            <span class="aurea-stock__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D97706" stroke="none"><path d="M12 2c-1.5 0-3 .5-4 2-2 3 0 7 2 10 1 1.5 2 4 2 6h2c0-2 1-4.5 2-6 2-3 4-7 2-10-1-1.5-2.5-2-4-2zm0 4c.5 0 1 .5 1 1.5s-.5 2-1 3c-.5-1-1-2-1-3s.5-1.5 1-1.5z"/></svg></span>
             <span class="aurea-stock__text">High Demand – Selling Fast</span>
           </div>
         `;
@@ -217,7 +217,7 @@
       case 'available':
         html = `
           <div class="aurea-stock aurea-stock--available" data-stock-content>
-            <span class="aurea-stock__icon">✓</span>
+            <span class="aurea-stock__icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
             <span class="aurea-stock__text">In Stock – Ready to Ship</span>
           </div>
         `;
